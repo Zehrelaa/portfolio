@@ -1,14 +1,14 @@
 name: Portfolio Deployment 
 
 on: 
-  push:
-    branches:
-      - main
+ push:
+  branches:
+  - main
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
+    build-and-deploy:
+      runs-on: ubuntu-latest
+      steps:
       - name: Checkout 
         uses: actions/checkout@v1
 
@@ -16,8 +16,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_secret_access_key: ${{secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: us-east-1
 
-      - name: Deploy static site to S3 bucket
+      - name: Deploy statis site to S3 bucket
         run: aws s3 sync . s3://portfolio.mlcoe --delete
